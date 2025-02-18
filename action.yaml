@@ -45,7 +45,6 @@ runs:
     - run: |
         subfinder \
           ${{ env.list }} \
-          ${{ env.config }} \
           ${{ env.output }} \
           ${{ env.json }} \
           ${{ env.flags }} \
