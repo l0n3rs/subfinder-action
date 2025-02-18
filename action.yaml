@@ -48,7 +48,6 @@ runs:
           ${{ env.config }} \
           ${{ env.output }} \
           ${{ env.json }} \
-          ${{ env.hostip }} \
           ${{ env.flags }} \
           ${{ env.active }} -oI -silent
       shell: bash
