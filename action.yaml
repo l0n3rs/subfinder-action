@@ -10,11 +10,6 @@ inputs:
     required: true
     default: ""
 
-  config:
-    description: "Config file to use for subdomain enumeration"
-    required: false
-    default: ""
-
   output:
     description: "File to save output result"
     required: false
@@ -40,10 +35,10 @@ runs:
     - run: |
         [ ! -x /home/runner/go/bin/subfinder ] && go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
         [ ! -z ${{ inputs.list }} ] && echo "list=-dL ${{ inputs.list}}" >> $GITHUB_ENV
-        [ ! -z ${{ inputs.config }} ] && echo "config=-config ${{ inputs.config }}" >> $GITHUB_ENV
         [ ! -z ${{ inputs.output }} ] && echo "output=-o ${{ inputs.output}}" >> $GITHUB_ENV || echo "output=-o subfinder.log" >> $GITHUB_ENV
         [ ! -z "${{ inputs.flags }}" ] && echo "flags=${{ inputs.flags }}" >> $GITHUB_ENV
         ${{ inputs.json }} && echo "json=-json" >> $GITHUB_ENV
+        echo "hostip=-oI" >> $GITHUB_ENV
         ${{ inputs.active }} && echo "active=-nW" >> $GITHUB_ENV
         echo "/home/runner/go/bin/" >> $GITHUB_PATH
       shell: bash
@@ -54,6 +49,7 @@ runs:
           ${{ env.config }} \
           ${{ env.output }} \
           ${{ env.json }} \
+          ${{ env.hostip }}
           ${{ env.flags }} \
-          ${{ env.active }}
+          ${{ env.active }} -silent
       shell: bash
