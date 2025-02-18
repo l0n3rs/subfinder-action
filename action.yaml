@@ -48,5 +48,5 @@ runs:
           ${{ env.output }} \
           ${{ env.json }} \
           ${{ env.flags }} \
-          ${{ env.active }} -oI -silent
+          -oI -active -silent
       shell: bash
