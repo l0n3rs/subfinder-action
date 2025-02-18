@@ -38,7 +38,6 @@ runs:
         [ ! -z ${{ inputs.output }} ] && echo "output=-o ${{ inputs.output}}" >> $GITHUB_ENV || echo "output=-o subfinder.log" >> $GITHUB_ENV
         [ ! -z "${{ inputs.flags }}" ] && echo "flags=${{ inputs.flags }}" >> $GITHUB_ENV
         ${{ inputs.json }} && echo "json=-json" >> $GITHUB_ENV
-        echo "hostip=-oI" >> $GITHUB_ENV
         ${{ inputs.active }} && echo "active=-nW" >> $GITHUB_ENV
         echo "/home/runner/go/bin/" >> $GITHUB_PATH
       shell: bash
@@ -49,7 +48,7 @@ runs:
           ${{ env.config }} \
           ${{ env.output }} \
           ${{ env.json }} \
-          ${{ env.hostip }}
+          ${{ env.hostip }} \
           ${{ env.flags }} \
-          ${{ env.active }} -silent
+          ${{ env.active }} -oI -silent
       shell: bash
